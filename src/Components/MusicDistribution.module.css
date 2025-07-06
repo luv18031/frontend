@@ -1,5 +1,4 @@
 .music-distribution-container{
-    width: 80vw;
     margin: auto;
     font-family: "Roboto Slab", serif;
     font-optical-sizing: auto;
@@ -20,8 +19,11 @@
 .heading{
     width: fit-content;
 }
+.heading span{
+    line-height: 20px;
+}
 .heading span:nth-child(3){
-    display: inline-block;
+    display: block;
 }
 .heading span:nth-child(2){
     color: rgb(46, 218, 46);
@@ -52,5 +54,5 @@
     width: 100%;
     position: relative;
     z-index: -1;
-    filter: contrast(1.35) brightness(0.55);
+    filter: contrast(1) brightness(0.55);
 }

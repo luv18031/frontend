@@ -11,7 +11,7 @@ function Navbar(){
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Sell Your Music</a>
@@ -37,7 +37,9 @@ function Navbar(){
                 <li class="nav-item">
                 <a class="nav-link" href="#">Jobs</a>
                 </li>
-                
+                <li class="nav-item login-btn">
+                <a class="nav-link" href="/login">Login</a>
+                </li>
             </ul>
             </div>
         </div>

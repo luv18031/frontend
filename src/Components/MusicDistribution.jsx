@@ -1,9 +1,9 @@
-import styles from "./MusicDistribution.module.css"
-import video from './../video/home-head-video.mp4'
+import video from './../video/home-head-video.mp4';
+import styles from "./MusicDistribution.module.css";
 
 function MusicDistribution(){
     return (
-        <div>
+        <div className={styles["main-container"]}>
             <video autoPlay muted loop className={styles["video"]}>
                 <source src={video} type="video/mp4"/>
             </video>
