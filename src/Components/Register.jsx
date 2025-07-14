@@ -2,12 +2,12 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function Login() {
+function Register() {
 
   const initialState = {
-    // name: "",
-    username: "",
-    password: ""
+    password: "",
+    email: "",
+    username: ""
   }
 
   // const [csrfToken, setCsrfToken] = useState('');
@@ -54,7 +54,7 @@ function Login() {
 
     // const token = axios.get('http://localhost:8080/csrf-token').data.token;
 
-    fetch('http://localhost:8080/api/auth/login', {
+    fetch('http://localhost:8080/api/auth/register', {
       method: "POST",
       body: JSON.stringify(eachEntry),
       headers: {
@@ -63,18 +63,17 @@ function Login() {
         'Content-Type': 'application/json'
       },
     })
-    .then( (response) => {
-      console.log("abc",response)
-      if(response.status===401){
-        alert("Invalid login id and password");
-      }else if(response.status===200){
-        alert("Logged in success")
+    .then(
+      (response) => {
+        if(response.status===409){
+          alert("User already exists");
+        }else{
+          alert("User registration successful")
+        }
       }
-      response.json()
-    }).then((response) => {
-      // do something with json data
-      console.log(response)
-    })
+    ).then(
+      (response) => (response.json())
+    )
   }
 
 
@@ -99,6 +98,14 @@ function Login() {
         type="text" placeholder="Enter Username" />
       </Form.Group>
 
+      <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Label>Email</Form.Label>
+        <Form.Control 
+        name='email'
+        onChange={handleOnChange}
+        type="text" placeholder="Enter Email" />
+      </Form.Group>
+
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control 
@@ -119,4 +126,4 @@ function Login() {
 
 }
 
-export default Login;
+export default Register;
