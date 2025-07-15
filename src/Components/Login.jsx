@@ -45,6 +45,7 @@ function Login() {
   const [eachEntry, setEachEntry] = useState(initialState)
   // const {name, email, username} = eachEntry
 
+  
   const handleOnChange = e => {
       setEachEntry({...eachEntry, [e.target.name]: e.target.value})
   }
@@ -73,7 +74,9 @@ function Login() {
       return response.json()
     }).then((response) => {
       // do something with json data
-      console.log(response)
+      localStorage.setItem('jwt-token', response.token)
+      setEachEntry(initialState)
+      
       return true;
     })
   }
