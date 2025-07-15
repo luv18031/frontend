@@ -64,16 +64,17 @@ function Login() {
       },
     })
     .then( (response) => {
-      console.log("abc",response)
+      console.log("abc",response.body)
       if(response.status===401){
         alert("Invalid login id and password");
       }else if(response.status===200){
         alert("Logged in success")
       }
-      response.json()
+      return response.json()
     }).then((response) => {
       // do something with json data
       console.log(response)
+      return true;
     })
   }
 
