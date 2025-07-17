@@ -2,43 +2,43 @@
 
 function Navbar(){
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+            <a className="navbar-brand" href="/">Logo</a>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul className="navbar-nav">
+                <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Sell Your Music</a>
+                <li className="nav-item">
+                <a className="nav-link" href="/">Sell Your Music</a>
                 </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Services
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Music Distribution</a></li>
-                    <li><a class="dropdown-item" href="#">Video Distribution</a></li>
-                    <li><a class="dropdown-item" href="#">Lyrics Distribution</a></li>
-                    <li><a class="dropdown-item" href="#">Caller Tune Distribution</a></li>
-                    <li><a class="dropdown-item" href="#">Music Publishing</a></li>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a className="dropdown-item" href="/">Music Distribution</a></li>
+                    <li><a className="dropdown-item" href="/">Video Distribution</a></li>
+                    <li><a className="dropdown-item" href="/">Lyrics Distribution</a></li>
+                    <li><a className="dropdown-item" href="/">Caller Tune Distribution</a></li>
+                    <li><a className="dropdown-item" href="/">Music Publishing</a></li>
                 </ul>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Artist Help</a>
+                <li className="nav-item">
+                <a className="nav-link" href="/">Artist Help</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Blogs</a>
+                <li className="nav-item">
+                <a className="nav-link" href="/">Blogs</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Jobs</a>
+                <li className="nav-item">
+                <a className="nav-link" href="/">Jobs</a>
                 </li>
-                <li class="nav-item login-btn">
-                <a class="nav-link" href="/login">Login</a>
+                <li className="nav-item login-btn">
+                <a className="nav-link" href="/login">Login</a>
                 </li>
             </ul>
             </div>
