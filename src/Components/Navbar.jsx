@@ -1,6 +1,20 @@
+import { useState } from "react";
+import { useAuth } from "./context/AuthContext";
 
 
 function Navbar(){
+
+    const Auth = useAuth()
+
+    const isLoggedIn = Auth.userIsAuthenticated()
+    
+    const [isError, setIsError] = useState(false)
+
+
+    const handleLogout = (e) => {
+        Auth.userLogout();
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
@@ -38,7 +52,12 @@ function Navbar(){
                 <a className="nav-link" href="/">Jobs</a>
                 </li>
                 <li className="nav-item login-btn">
-                <a className="nav-link" href="/login">Login</a>
+                    {
+                        isLoggedIn ?
+                        <button onClick={handleLogout} className="nav-link"> Logout </button> :
+                        <a className="nav-link" href="/login">Login</a>
+                    }
+                
                 </li>
             </ul>
             </div>

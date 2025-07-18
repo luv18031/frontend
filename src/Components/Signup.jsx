@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
-import { Form } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from "./context/AuthContext";
 import { userApi } from "./misc/UserApi";
 
-
-export default function Signup(){
+function Signup(){
 
     const Auth = useAuth()
 
     const isLoggedIn = Auth.userIsAuthenticated()
+
+    const navigate = useNavigate();
 
 
     const [username, setUsername] = useState('')
@@ -19,13 +21,13 @@ export default function Signup(){
     const [errorMessage, setErrorMessage] = useState('')
 
 
-    const handleOnChange = (e, {name, value}) => {
-        if (name === 'username') {
-            setUsername(value)
-        } else if (name === 'email') {
-            setEmail(email)
-        } else if (name === 'password') {
-            setPassword(password)
+    const handleOnChange = (e) => {
+        if (e.target.name === 'username') {
+            setUsername(e.target.value)
+        } else if (e.target.name === 'email') {
+            setEmail(e.target.value)
+        } else if (e.target.name === 'password') {
+            setPassword(e.target.value)
         }
     }
 
@@ -44,13 +46,24 @@ export default function Signup(){
 
         try {
             const response = await userApi.signup(user)
-
+            if(response.status===201){
+                navigate('/login')  
+            }else if(response.status===200){
+              setIsError(true)
+              setErrorMessage('User email or username already exists.')
+            }
             
+        } catch (e){
+          console.log(e)
         }
     }
 
+    if(isLoggedIn) {
+      return <Navigate to={'/'} />
+    }
+
     return (
-        <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -82,6 +95,9 @@ export default function Signup(){
       variant="primary" type="submit">
         Register
       </Button>
+      {isError ? <div>{errorMessage}</div>:""}
     </Form>
     )
 }
+
+export default Signup;

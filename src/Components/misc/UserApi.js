@@ -18,7 +18,7 @@ instance.interceptors.request.use(function (config) {
 
     return config;
 }, function(error) {
-    return Promise.reject(error)
+    console.log("error caught in interceptor", error)
 } )
 
 

@@ -20,37 +20,6 @@ function Login() {
     password: ""
   }
 
-  // const [csrfToken, setCsrfToken] = useState('');
-
-  // useEffect(() => {
-  //   const token = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-  //   setCsrfToken(token);
-  //   console.log(token)
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchCsrfToken = async () => {
-  //     console.log("before getting token")
-  //     const response = await axios.get('http://localhost:8080/csrf-token')
-  //     .catch(error => {
-  //       if (error.response) {
-  //         // The server responded with a status code outside the 2xx range
-  //         console.log('Error response:', error.response);
-  //       } else if (error.request) {
-  //         // The request was made but no response was received
-  //         console.log('Error request:', error.request);
-  //       } else {
-  //         // Something happened in setting up the request that triggered an error
-  //         console.log('Error message:', error.message);
-  //       }
-  //     });
-  //     console.log("after getting token")
-  //     setCsrfToken(response.data.csrfToken);
-  //     console.log(response)
-  //   };
-  //   fetchCsrfToken();
-  // }, []);
-
 
   const [eachEntry, setEachEntry] = useState(initialState)
   // const {name, email, username} = eachEntry
@@ -71,9 +40,7 @@ function Login() {
     // const token = axios.get('http://localhost:8080/csrf-token').data.token;
     try {
       const response = await userApi.authenticate(eachEntry.username, eachEntry.password)
-      console.log(response)
       const data = parseJwt(response.data.token)
-      console.log(data)
       const authenticatedUser = {data: data, accessToken: response.data.token}
 
       Auth.userLogin(authenticatedUser)
