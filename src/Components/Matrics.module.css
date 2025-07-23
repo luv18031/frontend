@@ -1,6 +1,7 @@
 .main-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    margin: 3rem 0;
 }
 
 .container{
@@ -9,6 +10,6 @@
 }
 
 .number{
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
 }

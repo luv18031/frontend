@@ -1,0 +1,17 @@
+.card{
+    border: 2px solid gray;
+    padding: 2rem 1rem;
+    margin: 15px 0;
+    flex-basis: 25rem;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+
+.card-content{
+    margin-top: 2rem;
+}
+
+.card-content h3{
+    display: inline-block;
+    height: 8rem;
+}

@@ -1,0 +1,24 @@
+.review-card{
+    width: 25rem;
+    border: 2px solid rgb(231, 225, 225);
+    padding: 1rem;
+    flex-basis: 25rem;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+
+.review-author img{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+}
+
+.review-content{
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.review-author p{
+    margin-bottom: 5px;
+}

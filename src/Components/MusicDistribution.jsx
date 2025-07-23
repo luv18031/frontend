@@ -4,9 +4,11 @@ import styles from "./MusicDistribution.module.css";
 function MusicDistribution(){
     return (
         <div className={styles["main-container"]}>
-            <video autoPlay muted loop className={styles["video"]}>
-                <source src={video} type="video/mp4"/>
-            </video>
+            <div className={styles["video-container"]}>
+                <video autoPlay muted loop className={styles["video"]}>
+                    <source src={video} type="video/mp4"/>
+                </video>
+            </div>
             <div className={styles["music-distribution-container"]}>
                 <div className={styles["heading"]} >
                     <span >Free </span>
