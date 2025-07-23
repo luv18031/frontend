@@ -5,6 +5,7 @@ import App from './App';
 import { AuthProvider } from './Components/context/AuthContext';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import Users from './Components/Users';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Signup />
+  },
+  {
+    path: "/users",
+    element: <Users />
   }
 ]);
 

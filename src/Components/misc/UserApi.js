@@ -34,9 +34,9 @@ function authenticate(username, password) {
     })
 }
 
-function getAllUsers(){
+function getAllUsers(user){
     return instance.get('/api/users', {
-        headers: { 'Authorization': bearerAuth() }
+        headers: { 'Authorization': bearerAuth(user) }
     })
 }
 
