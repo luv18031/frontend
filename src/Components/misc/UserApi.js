@@ -25,7 +25,8 @@ instance.interceptors.request.use(function (config) {
 export const userApi = {
     authenticate,
     getAllUsers,
-    signup
+    signup,
+    getUserProfile
 }
 
 function authenticate(username, password) {
@@ -36,6 +37,12 @@ function authenticate(username, password) {
 
 function getAllUsers(user){
     return instance.get('/api/users', {
+        headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
+function getUserProfile(user) {
+    return instance.get('/api/profile', {username: user.username}, {
         headers: { 'Authorization': bearerAuth(user) }
     })
 }

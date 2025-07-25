@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
+import Checkout from './checkout/Checkout';
 import { AuthProvider } from './Components/context/AuthContext';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Users from './Components/Users';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/users",
     element: <Users />
+  },
+  {
+    path: "/checkout",
+    element: <Checkout />
   }
 ]);
 
