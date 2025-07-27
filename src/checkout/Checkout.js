@@ -134,7 +134,7 @@ export default function Checkout(props) {
               >
                 {steps.map((label) => (
                   <Step
-                    sx={{ ':first-child': { pl: 0 }, ':last-child': { pr: 0 } }}
+                    sx={{ ':first-of-type': { pl: 0 }, ':last-child': { pr: 0 } }}
                     key={label}
                   >
                     <StepLabel>{label}</StepLabel>
@@ -183,7 +183,7 @@ export default function Checkout(props) {
               {steps.map((label) => (
                 <Step
                   sx={{
-                    ':first-child': { pl: 0 },
+                    ':first-of-type': { pl: 0 },
                     ':last-child': { pr: 0 },
                     '& .MuiStepConnector-root': { top: { xs: 6, sm: 12 } },
                   }}
@@ -199,18 +199,15 @@ export default function Checkout(props) {
             </Stepper>
             {activeStep === steps.length ? (
               <Stack spacing={2} useFlexGap>
-                <Typography variant="h1">📦</Typography>
-                <Typography variant="h5">Thank you for your order!</Typography>
+                <Typography variant="h5">Your Profile is completed.</Typography>
                 <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-                  Your order number is
-                  <strong>&nbsp;#140396</strong>. We have emailed your order
-                  confirmation and will update you once its shipped.
+                  Click on the below button to go to the home page.
                 </Typography>
                 <Button
                   variant="contained"
                   sx={{ alignSelf: 'start', width: { xs: '100%', sm: 'auto' } }}
                 >
-                  Go to my orders
+                  Home Page
                 </Button>
               </Stack>
             ) : (

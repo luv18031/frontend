@@ -11,6 +11,7 @@ instance.interceptors.request.use(function (config) {
     if(config.headers.Authorization) {
         const token = config.headers.Authorization.split(" ")[1]
         const data = parseJwt(token)
+        console.log("Authorization header found in request:", data)
         if (Date.now() > data.exp * 1000) {
             window.location.href = "/login"
         }
@@ -42,7 +43,8 @@ function getAllUsers(user){
 }
 
 function getUserProfile(user) {
-    return instance.get('/api/profile', {username: user.username}, {
+    console.log("Fetching user profile for:", user)
+    return instance.get(`/api/profile?username=${user.data.sub}`,{
         headers: { 'Authorization': bearerAuth(user) }
     })
 }

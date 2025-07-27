@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <Users />
   },
   {
-    path: "/checkout",
+    path: "/profile",
     element: <Checkout />
   }
 ]);

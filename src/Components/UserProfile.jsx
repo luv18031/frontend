@@ -73,10 +73,6 @@ export default function UserProfile() {
     //     }
     // }
 
-    if(isLoggedIn) {
-        return <Navigate to={'/'} />
-    }
-
     if(isLoading) {
         return <div>Loading...</div>
     }
