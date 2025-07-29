@@ -43,11 +43,12 @@ export default function AddressForm() {
   const user = Auth.getUser()
 
   const [profile, setProfile] = useState(null);
-
+  
   useEffect(() => { 
     const fetchUserProfile = async () => {
       try {
         const response = await userApi.getUserProfile(user)
+        setProfile(null)
         // fetch(`http://localhost:8080/api/profile?username=${user.data.sub}`, {
         //   method: 'GET',
         //   headers: {
@@ -93,19 +94,13 @@ export default function AddressForm() {
   }, [])
 
   const handleChange = (event) => {
-    const { name, value, files } = event.target;
+    const { name, value } = event.target;
     console.log("Change event:", event);
 
     setUserDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value // Store the text input value
     }));
-  };
-
-  const handleProfileChange = (e) => {
-    if (e.target.files) {
-      setProfile(e.target.files[0]);
-    }
   };
 
 
@@ -212,15 +207,22 @@ export default function AddressForm() {
       <FormGrid size={{ xs: 6 }}>
         <FormLabel htmlFor="profilePicture">Profile Pic</FormLabel>
         <OutlinedInput
-        onChange={handleProfileChange}
           id="profilePicture"
-          name="profilePicture"
           type="file" 
           accept="image/*"
-          value={userDetails.profilePicture==null ? '' : userDetails.profilePicture}
           required
         />
       </FormGrid>
+      {/* {
+        profile && 
+        (
+          <img
+             alt="not found"
+             width={"250px"}
+             src={URL.createObjectURL(profile)}
+           />
+        )
+      } */}
        <FormGrid size={{ xs: 6 }}>
         <FormLabel htmlFor="governmentPictureId">Government Id Pic</FormLabel>
         <OutlinedInput
@@ -229,7 +231,6 @@ export default function AddressForm() {
           name="governmentPictureId"
           type="file" 
           accept="image/*"
-          value={profile}
           required
         />
       </FormGrid>

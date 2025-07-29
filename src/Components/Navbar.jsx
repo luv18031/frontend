@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAuth } from "./context/AuthContext";
 
 
@@ -8,7 +7,6 @@ function Navbar(){
 
     const isLoggedIn = Auth.userIsAuthenticated()
     
-    const [isError, setIsError] = useState(false)
 
 
     const handleLogout = (e) => {
