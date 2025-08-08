@@ -12,6 +12,8 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { useAuth } from '../Components/context/AuthContext';
+import { userApi } from '../Components/misc/UserApi';
 import AppTheme from '../shared-theme/AppTheme';
 import ColorModeIconDropdown from '../shared-theme/ColorModeIconDropdown';
 import AddressForm from './components/AddressForm';
@@ -21,10 +23,10 @@ import PaymentForm from './components/PaymentForm';
 import Review from './components/Review';
 
 const steps = ['Profile Verification', 'Label Verification', 'Agreement Signing'];
-function getStepContent(step) {
+function getStepContent(step,userDetails, setUserDetails) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm userDetails={userDetails} setUserDetails={setUserDetails} />;
     case 1:
       return <PaymentForm />;
     case 2:
@@ -35,7 +37,34 @@ function getStepContent(step) {
 }
 export default function Checkout(props) {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [userDetails, setUserDetails] = React.useState({
+    name: '',
+    address: '',
+    city: '',
+    state: '',
+    pinCode: '',
+    country: '',
+    email: '',
+    phoneNumber: '',
+    profilePicture: null,
+    governmentPictureId: null,
+    register_as: ''
+  });
+  const Auth = useAuth()
   const handleNext = () => {
+    if(activeStep === 0) {
+      try {
+        
+        const user = Auth.getUser()
+        const response = userApi.updateUserProfile(user, userDetails);
+        console.log(userDetails)
+        console.log("User profile updated successfully:", response);
+      } catch (error) {
+        console.error("Error updating user profile:", error);
+        return;
+      }
+    }
+
     setActiveStep(activeStep + 1);
   };
   const handleBack = () => {
@@ -212,7 +241,7 @@ export default function Checkout(props) {
               </Stack>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, userDetails, setUserDetails)}
                 <Box
                   sx={[
                     {

@@ -13,31 +13,23 @@ const FormGrid = styled(Grid)(() => ({
   flexDirection: 'column',
 }));
 
-export default function AddressForm() {
+export default function AddressForm({userDetails, setUserDetails}) {
 
   const [register_as, setRegisterAs] = React.useState('');
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleRegisterChange = (event) => {
     setRegisterAs(event.target.value);
   };
 
-  const [userDetails, setUserDetails] = React.useState({
-    name: '',
-    address: '',
-    city: '',
-    state: '',
-    pinCode: '',
-    country: '',
-    email: '',
-    phoneNumber: '',
-    profilePicture: null,
-    governmentPictureId: null,
-    username: '',
-  });
-  
- 
+  useEffect(() => {
+    setUserDetails((prevDetails) => ({
+      ...prevDetails,
+      register_as: register_as // Store the text input value
+    }));
+  }, [register_as]);
 
-  
   const Auth = useAuth()
 
   const user = Auth.getUser()
@@ -64,10 +56,11 @@ export default function AddressForm() {
         //   console.log("User profile fetched successfully:", data);
         // });
         console.log("User profile fetched successfully:", response.data)
+        
+        setRegisterAs(response.data.register_as || '');
 
         setUserDetails({
-          name: response.data.name || '',
-          lastName: response.data.lastName || '',
+          name: user.data.sub,
           address: response.data.address || '',
           city: response.data.city || '',
           state: response.data.state || '',
@@ -77,12 +70,13 @@ export default function AddressForm() {
           phoneNumber: response.data.phoneNumber || '',
           profilePicture: response.data.profilePicture || null,
           governmentPictureId: response.data.governmentPictureId || null,
-          username: response.data.username || '',
+          register_as: response.register_as || ''
         });
 
-        setRegisterAs(response.data.register_as || '');
       } catch (error) {
         console.error("Error fetching user profile:", error)
+      } finally {
+        setIsLoading(false);
       }
     // }catch (error) {
     //     console.error("Error fetching user profile:", error)
@@ -95,13 +89,17 @@ export default function AddressForm() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log("Change event:", event);
+    console.log("name and value:", name, value);
 
     setUserDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value // Store the text input value
     }));
   };
+
+  if(isLoading) {
+      return <div>Loading...</div>
+  }
 
 
   if(!user) {
@@ -116,15 +114,14 @@ export default function AddressForm() {
           Name
         </FormLabel>
         <OutlinedInput
-        onChange={handleChange}
           id="name"
           name="name"
           type="name"
           placeholder="John"
           autoComplete="name"
-          value={userDetails.name}
           required
           size="small"
+          value={userDetails.name}
         />
       </FormGrid>
       <FormGrid size={{ xs: 12, md: 6 }}>
@@ -132,7 +129,6 @@ export default function AddressForm() {
           Email
         </FormLabel>
         <OutlinedInput
-        onChange={handleChange}
           id="email"
           name="email"
           type="email"

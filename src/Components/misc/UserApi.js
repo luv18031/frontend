@@ -27,7 +27,8 @@ export const userApi = {
     authenticate,
     getAllUsers,
     signup,
-    getUserProfile
+    getUserProfile,
+    updateUserProfile
 }
 
 function authenticate(username, password) {
@@ -45,6 +46,12 @@ function getAllUsers(user){
 function getUserProfile(user) {
     console.log("Fetching user profile for:", user)
     return instance.get(`/api/profile?username=${user.data.sub}`,{
+        headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
+function updateUserProfile(user, profile) {
+    return instance.patch(`/api/profile?username=${user.data.sub}`, profile, {
         headers: { 'Authorization': bearerAuth(user) }
     })
 }
