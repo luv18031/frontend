@@ -1,17 +1,75 @@
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../Components/context/AuthContext';
+import { userApi } from '../../Components/misc/UserApi';
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type:', detail: 'Visa' },
-  { name: 'Card holder:', detail: 'Mr. John Smith' },
-  { name: 'Card number:', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date:', detail: '04/2024' },
-];
 
 export default function Review() {
+
+  const [userDetails, setUserDetails] = React.useState('');
+  
+  const [isLoading, setIsLoading] = useState(true);
+
+  const Auth = useAuth()
+
+  const user = Auth.getUser()
+
+  
+  useEffect(() => { 
+    const fetchUserProfile = async () => {
+      try {
+        const response = await userApi.getUserProfile(user)
+        // fetch(`http://localhost:8080/api/profile?username=${user.data.sub}`, {
+        //   method: 'GET',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${user.accessToken}`
+        //   }
+        // }).then(response => {
+        //   if (!response.ok) {
+        //     throw new Error('Network response was not ok');
+        //   }
+        //   return response.json();
+        // }).then(data => {
+        //   console.log("User profile fetched successfully:", data);
+        // });
+        
+
+        setUserDetails({
+          name: user.data.sub,
+          address: response.data.address || '',
+          city: response.data.city || '',
+          state: response.data.state || '',
+          pinCode: response.data.pinCode || '',
+          country: response.data.country || '',   
+          email: response.data.email || '',
+          phoneNumber: response.data.phoneNumber || '',
+          profilePicture: response.data.profilePicture || null,
+          governmentPictureId: response.data.governmentPictureId || null,
+          register_as: response.register_as || ''
+        });
+
+      } catch (error) {
+        console.error("Error fetching user profile:", error)
+      } finally {
+        setIsLoading(false);
+      }
+    // }catch (error) {
+    //     console.error("Error fetching user profile:", error)
+    //   }
+
+
+    }
+    fetchUserProfile()
+  }, [])
+
+  if (isLoading) {
+    return <div>Loading...</div>; // or a spinner, or any loading indicator
+  }
+
+
   return (
     <Stack spacing={2}>
       <Stack
@@ -21,34 +79,18 @@ export default function Review() {
       >
         <div>
           <Typography variant="subtitle2" gutterBottom>
-            Label details
+            User Details
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>{userDetails.name}</Typography>
           <Typography gutterBottom sx={{ color: 'text.secondary' }}>
-            {addresses.join(', ')}
+            {userDetails.email} {userDetails.phoneNumber ? ` | ${userDetails.phoneNumber}` : ''}
           </Typography>
-        </div>
-        <div>
-          <Typography variant="subtitle2" gutterBottom>
-            Payment details
+          <Typography gutterBottom sx={{ color: 'text.secondary' }}>
+            {userDetails.address}, {userDetails.city}, {userDetails.state} {userDetails.pinCode}, {userDetails.country  ? ` | ${userDetails.country}` : ''}
           </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  useFlexGap
-                  sx={{ width: '100%', mb: 1 }}
-                >
-                  <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-                    {payment.name}
-                  </Typography>
-                  <Typography variant="body2">{payment.detail}</Typography>
-                </Stack>
-              </React.Fragment>
-            ))}
-          </Grid>
+          <Typography gutterBottom sx={{ color: 'text.secondary' }}>
+            Registered as: {userDetails.register_as}
+          </Typography>
         </div>
       </Stack>
     </Stack>

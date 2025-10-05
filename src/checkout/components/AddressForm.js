@@ -34,13 +34,11 @@ export default function AddressForm({userDetails, setUserDetails}) {
 
   const user = Auth.getUser()
 
-  const [profile, setProfile] = useState(null);
   
   useEffect(() => { 
     const fetchUserProfile = async () => {
       try {
         const response = await userApi.getUserProfile(user)
-        setProfile(null)
         // fetch(`http://localhost:8080/api/profile?username=${user.data.sub}`, {
         //   method: 'GET',
         //   headers: {

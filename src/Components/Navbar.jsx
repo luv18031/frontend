@@ -28,6 +28,7 @@ function Navbar(){
                 <li className="nav-item">
                 <a className="nav-link" href="/">Sell Your Music</a>
                 </li>
+                
                 <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Services
@@ -48,6 +49,9 @@ function Navbar(){
                 </li>
                 <li className="nav-item">
                 <a className="nav-link" href="/">Jobs</a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item login-btn">
                     {

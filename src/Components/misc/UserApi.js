@@ -28,7 +28,11 @@ export const userApi = {
     getAllUsers,
     signup,
     getUserProfile,
-    updateUserProfile
+    updateUserProfile,
+    fetchChannels,
+    updateChannels,
+    createChannel,
+    removeChannel
 }
 
 function authenticate(username, password) {
@@ -50,8 +54,33 @@ function getUserProfile(user) {
     })
 }
 
+function createChannel(user, channel) {
+    return instance.post('/api/channels', channel, {
+        headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
+function removeChannel(user, channelName) {
+    return instance.delete(`/api/channels?channelName=${channelName}`, {
+        headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
 function updateUserProfile(user, profile) {
+    console.log(user.data.sub)
     return instance.patch(`/api/profile?username=${user.data.sub}`, profile, {
+        headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
+function updateChannels(user, channels) {
+    return instance.patch(`/api/channels`, channels, {
+        headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
+function fetchChannels(user) {
+    return instance.get('/api/channels', {
         headers: { 'Authorization': bearerAuth(user) }
     })
 }

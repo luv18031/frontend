@@ -1,8 +1,5 @@
 .intro-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     margin: 5rem 10rem;
-    grid-column-gap: 15rem;
 }
 
 .highlight-text{
@@ -57,6 +54,10 @@
 ::-webkit-scrollbar { 
 display: none; 
 }
+.ddex-container{
+    display: flex;
+    width: 100%;
+}
 .ddex-container h2{
     font-size: 2.5rem;
 }
@@ -103,4 +104,10 @@ display: none;
     display: flex;
     gap: 2rem;
     overflow-x: auto;
+}
+
+@media (min-width: 400px) and (max-width: 1400px) {
+    /* CSS rules for tablets go here */
+
+   
 }

@@ -21,14 +21,15 @@ import Info from './components/Info';
 import InfoMobile from './components/InfoMobile';
 import PaymentForm from './components/PaymentForm';
 import Review from './components/Review';
+import { useState } from 'react';
 
 const steps = ['Profile Verification', 'Label Verification', 'Agreement Signing'];
-function getStepContent(step,userDetails, setUserDetails) {
+function getStepContent(step,userDetails, setUserDetails, channels, setChannels, newChannel, setNewChannel) {
   switch (step) {
     case 0:
       return <AddressForm userDetails={userDetails} setUserDetails={setUserDetails} />;
     case 1:
-      return <PaymentForm />;
+      return <PaymentForm channels={channels} setChannels={setChannels} newChannel={newChannel} setNewChannel={setNewChannel} />;
     case 2:
       return <Review />;
     default:
@@ -50,17 +51,51 @@ export default function Checkout(props) {
     governmentPictureId: null,
     register_as: ''
   });
+
+  const [newChannel, setNewChannel] = useState({
+            Channel_name: "",
+            Channel_url: "",
+            subscriber_count: null,
+            videos_count: null
+        });
+
+  const [channels, setChannels] = useState([{
+            Channel_name: "",
+            Channel_url: "",
+            subscriber_count: null,
+            videos_count: null
+        }]);
   const Auth = useAuth()
   const handleNext = () => {
     if(activeStep === 0) {
       try {
         
         const user = Auth.getUser()
-        const response = userApi.updateUserProfile(user, userDetails);
+        const response = userApi.updateUserProfile(user, {...userDetails, username: userDetails.name});
         console.log(userDetails)
         console.log("User profile updated successfully:", response);
       } catch (error) {
         console.error("Error updating user profile:", error);
+        return;
+      }
+    }else if(activeStep === 1) {
+      // Handle label verification submission if needed
+      try {
+        const user = Auth.getUser();
+        if(newChannel.Channel_name && newChannel.Channel_url) {
+          const response = userApi.createChannel(user, newChannel);
+          setNewChannel({
+            Channel_name: "",
+            Channel_url: "",  
+            subscriber_count: null,
+            videos_count: null
+          });
+        }else{
+          const response = userApi.updateChannels(user, channels);
+        }
+        
+      } catch (error) {
+        console.error("Error updating channels:", error);
         return;
       }
     }
@@ -233,6 +268,7 @@ export default function Checkout(props) {
                   Click on the below button to go to the home page.
                 </Typography>
                 <Button
+                  href='/'
                   variant="contained"
                   sx={{ alignSelf: 'start', width: { xs: '100%', sm: 'auto' } }}
                 >
@@ -241,7 +277,7 @@ export default function Checkout(props) {
               </Stack>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, userDetails, setUserDetails)}
+                {getStepContent(activeStep, userDetails, setUserDetails, channels, setChannels, newChannel, setNewChannel)}
                 <Box
                   sx={[
                     {
@@ -286,7 +322,7 @@ export default function Checkout(props) {
                     onClick={handleNext}
                     sx={{ width: { xs: '100%', sm: 'fit-content' } }}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                   </Button>
                 </Box>
               </React.Fragment>

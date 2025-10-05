@@ -4,12 +4,15 @@ import { FaSpotify, FaYoutube } from "react-icons/fa6";
 import { MdAnalytics } from "react-icons/md";
 import { SiAmazonmusic } from "react-icons/si";
 import srk from "../images/330px-Shah_Rukh_Khan_2001.jpg";
-import image from "../images/image.png";
 
 import { useRef } from "react";
-import Card from "./Card";
+
 import styles from "./Intro.module.css";
 import ReviewCard from "./ReviewCard";
+import AipCards from "./AipCards";
+import Icons from "./Icons";
+import DdexCard from "./DdexCard";
+import ReviewContainer from "./ReviewContainer";
 
 export default function Intro() {
 
@@ -70,145 +73,12 @@ export default function Intro() {
                 </li>
             </ul>
         </div>
-        <div className={styles["icon-container"]}> 
-            <div className={styles["icon"]}>
-                <FaApple size={50}/>
-                <span>Music</span>
-            </div>
-            <div className={styles["icon"]}>
-                <FaSpotify size={50}/>
-                <span>Spotify</span>
-            </div>
-            <div className={styles["icon"]}>
-                <span>Pandora</span>
-            </div>
-            <div className={styles["icon"]}>
-                <FaYoutube size={50}/>
-                <span>You Tube</span>
-            </div>
-            <div className={styles["icon"]}>
-                <FaDeezer size={50}/>
-                <span>Deezer</span>
-            </div>
-            <div className={styles["icon"]}>
-                <FaFacebook size={50}/>
-                <span>Facebook</span>
-            </div>
-            <div className={styles["icon"]}>
-                <FaTiktok size={50}/>
-                <span>Tiktok</span>
-            </div>
-            <div className={styles["icon"]}>
-                <SiAmazonmusic size={50}/>
-            </div>
-        </div>
-        <div className={styles["cards-container"]}>
-            <h2>All-In-One Platform</h2>
-            <h4>Power your business with our robust suite of services.</h4>
-            <button onClick={scrollLeft}>Scroll <FaLongArrowAltLeft /></button>
-            <div className={styles["cards"]} ref={scrollContainerRef}>
-                <Card 
-                    title="Audio & Video Chain"
-                    description="All-in-One distribution platform to unleash and distribute your creativity to every corner of the world. Hit the right chords on Apple Music, Spotify, YouTube, iTunes, and many more."
-                    icon={FaMusic}
-                />
-                <Card 
-                    title="Global Distribution Simplified"
-                    description="Turn your passion into a global sensation and elevate your music to new heights, with our distribution network across major platforms."
-                    icon={CiLocationArrow1}
-                />
-                <Card 
-                    title="Advanced Rights Management"
-                    description="Manage all your ownership rights, Intellectual Property rights, and UGC claims in one place. Ensure you get compensated whenever anyone uses your content with or without permission."
-                    icon={CiShare2}
-                />
-                <Card 
-                    title="Royalty Payments"
-                    description="Rely on a singular platform to manage and receive your royalty payments with complete partiality. Always have an eye on people using your music and earn a certain amount."
-                    icon={FaWallet}
-                />
-                <Card 
-                    title="Data & Analytics"
-                    description="Monitor the interactions of your music and videos over several platforms and turn the listeners into fans. Learn from the data to impart continuous improvements in your artistic career."
-                    icon={MdAnalytics}
-                />
-            </div>
-            <button onClick={scrollRight}>Scroll <FaLongArrowAltRight /></button>
-        </div>
-        <div className={styles["ddex-container"]} >
-            <h2>
-                DDEX Gateway
-            </h2>
-            <p>
-                Leverage efficient business transactions, reduced cost, and increased profit, by adhering to Digital Data Exchange Standards.
-            </p>
-            <ul>
-                <li>
-                    Improved data quality
-                </li>
-                <li>
-                    Cost reduction between partners.
-                </li>
-                <li>
-                    Prevents duplication of work.
-                </li>
-                <li>
-                    Reduced data feeds.
-                </li>
-                <li>
-                    Better operational quality.
-                </li>
-                <li>
-                    Faster time to market.
-                </li>
-            </ul>
-        </div>
-        <div className={styles["ddex-image"]}>
-            <img src={image} alt="person carrying laptop" />
-        </div>
-        <div className={styles["review-container"]} >
-            <h2>What client say for ST Digital</h2>
-            <h4>WHAT CLIENT SAYS</h4>
-            <button onClick={scrollReviewLeft}>Scroll <FaLongArrowAltLeft /></button>
-            <div className={styles["container"]} ref={scrollReviewContainerRef}>
-                <ReviewCard review={{
-                    content: "ST Digital has been a game-changer for my music career. Their distribution services are top-notch, and the support team is always there to help. I've seen a significant increase in my streams and revenue since partnering with them.",
-                    author: "John Doe",
-                    position: "Independent Artist",
-                    image: srk,
-                    alt: "Shah Rukh Khan"
-                }} />
-                <ReviewCard review={{
-                    content: "ST Digital has been a game-changer for my music career. Their distribution services are top-notch, and the support team is always there to help. I've seen a significant increase in my streams and revenue since partnering with them.",
-                    author: "John Doe",
-                    position: "Independent Artist",
-                    image: srk,
-                    alt: "Shah Rukh Khan"
-                }} />
-                <ReviewCard review={{
-                    content: "ST Digital has been a game-changer for my music career. Their distribution services are top-notch, and the support team is always there to help. I've seen a significant increase in my streams and revenue since partnering with them.",
-                    author: "John Doe",
-                    position: "Independent Artist",
-                    image: srk,
-                    alt: "Shah Rukh Khan"
-                }} />
-                <ReviewCard review={{
-                    content: "ST Digital has been a game-changer for my music career. Their distribution services are top-notch, and the support team is always there to help. I've seen a significant increase in my streams and revenue since partnering with them.",
-                    author: "John Doe",
-                    position: "Independent Artist",
-                    image: srk,
-                    alt: "Shah Rukh Khan"
-                }} />
-                <ReviewCard review={{
-                    content: "ST Digital has been a game-changer for my music career. Their distribution services are top-notch, and the support team is always there to help. I've seen a significant increase in my streams and revenue since partnering with them.",
-                    author: "John Doe",
-                    position: "Independent Artist",
-                    image: srk,
-                    alt: "Shah Rukh Khan"
-                }} />
-            </div>
-            <button onClick={scrollReviewRight}>Scroll <FaLongArrowAltRight /></button>
-        </div>
+        <Icons />
+        
+        <AipCards />
+    
+        <DdexCard />
+        <ReviewContainer />
     </div>
   );
 }
